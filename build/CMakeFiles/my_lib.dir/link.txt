@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC   -shared -Wl,-soname,libmy_lib.so.1 -o libmy_lib.so.1.0.0 CMakeFiles/my_lib.dir/source/computeDeterminant.cpp.o 

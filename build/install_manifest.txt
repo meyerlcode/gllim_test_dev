@@ -1,0 +1,4 @@
+/usr/local/lib/libmy_lib.so.1.0.0
+/usr/local/lib/libmy_lib.so.1
+/usr/local/lib/libmy_lib.so
+/usr/local/include/computeDeterminant.hpp

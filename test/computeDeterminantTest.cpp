@@ -5,13 +5,29 @@
 
 int main(int argc, const char **argv) {
 
-    arma::mat A(5, 5);
-    A.ones(5,5);
-    std::cout << "A:\n" << A << "\n" << std::endl;
+    // // armadillo library
+    // arma::mat A(3, 3);
+    // A.ones(3,3);
+    // std::cout << "A:\n" << A << "\n" << std::endl;
+    // double detA;
+    // detA = computeDeterminant(A);
+
+    // Helpers H; // create helpers class
+    // double A2(3.5);
+    // detA = H.computeDeterminant(A2);
+
+    // det function without armadillo without class without pointers
+    double A[10][10] = { {1,1,1},
+                        {1,2,3},
+                        {0,1,0}};
+    // for (int i = 0; i < 10; i++) {
+    //     for (int j = 0; j < 10; j++) {
+    //         A[i][j] = 2;
+    //     }
+    // }
     double detA;
-    Helpers H;
-    double A2(3.5);
-    detA = H.computeDeterminant(A2);
+    detA = computeDeterminant(A, 3);
+
     std::cout << "det(A) = " << detA << "\n" << std::endl;
 
 

@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.9)
 
 # Specify the project info.
-project(convert VERSION 1.0.0 DESCRIPTION "Unit conversion library")
+project(my_lib VERSION 1.0.0 DESCRIPTION "compute matrix determinant library")
 
 # Declare the library target.
 add_library(${PROJECT_NAME} SHARED
@@ -21,3 +21,11 @@ set_target_properties(${PROJECT_NAME} PROPERTIES SOVERSION ${PROJECT_VERSION_MAJ
 
 # Set the public header property to the one with the actual API.
 set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER source/computeDeterminant.hpp)
+
+# For access to standard installation directory variables (CMAKE_INSTALL_xDIR).
+include(GNUInstallDirs)
+# Set library shared object and API header file to install.
+install(TARGETS ${PROJECT_NAME}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)

@@ -56,6 +56,30 @@ CMAKE_BINARY_DIR = /home/luc/Documents/gllim_test/shared_library/my_lib/build
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -66,6 +90,28 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
 
 # Special rule for the target rebuild_cache
 rebuild_cache:
@@ -111,17 +157,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named convert
+# Target rules for targets named my_lib
 
 # Build rule for target.
-convert: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 convert
-.PHONY : convert
+my_lib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 my_lib
+.PHONY : my_lib
 
 # fast build rule for target.
-convert/fast:
-	$(MAKE) -f CMakeFiles/convert.dir/build.make CMakeFiles/convert.dir/build
-.PHONY : convert/fast
+my_lib/fast:
+	$(MAKE) -f CMakeFiles/my_lib.dir/build.make CMakeFiles/my_lib.dir/build
+.PHONY : my_lib/fast
 
 source/computeDeterminant.o: source/computeDeterminant.cpp.o
 
@@ -129,7 +175,7 @@ source/computeDeterminant.o: source/computeDeterminant.cpp.o
 
 # target to build an object file
 source/computeDeterminant.cpp.o:
-	$(MAKE) -f CMakeFiles/convert.dir/build.make CMakeFiles/convert.dir/source/computeDeterminant.cpp.o
+	$(MAKE) -f CMakeFiles/my_lib.dir/build.make CMakeFiles/my_lib.dir/source/computeDeterminant.cpp.o
 .PHONY : source/computeDeterminant.cpp.o
 
 source/computeDeterminant.i: source/computeDeterminant.cpp.i
@@ -138,7 +184,7 @@ source/computeDeterminant.i: source/computeDeterminant.cpp.i
 
 # target to preprocess a source file
 source/computeDeterminant.cpp.i:
-	$(MAKE) -f CMakeFiles/convert.dir/build.make CMakeFiles/convert.dir/source/computeDeterminant.cpp.i
+	$(MAKE) -f CMakeFiles/my_lib.dir/build.make CMakeFiles/my_lib.dir/source/computeDeterminant.cpp.i
 .PHONY : source/computeDeterminant.cpp.i
 
 source/computeDeterminant.s: source/computeDeterminant.cpp.s
@@ -147,7 +193,7 @@ source/computeDeterminant.s: source/computeDeterminant.cpp.s
 
 # target to generate assembly for a file
 source/computeDeterminant.cpp.s:
-	$(MAKE) -f CMakeFiles/convert.dir/build.make CMakeFiles/convert.dir/source/computeDeterminant.cpp.s
+	$(MAKE) -f CMakeFiles/my_lib.dir/build.make CMakeFiles/my_lib.dir/source/computeDeterminant.cpp.s
 .PHONY : source/computeDeterminant.cpp.s
 
 # Help Target
@@ -156,9 +202,13 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... install/strip"
+	@echo "... install/local"
 	@echo "... edit_cache"
+	@echo "... install"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... convert"
+	@echo "... my_lib"
 	@echo "... source/computeDeterminant.o"
 	@echo "... source/computeDeterminant.i"
 	@echo "... source/computeDeterminant.s"
